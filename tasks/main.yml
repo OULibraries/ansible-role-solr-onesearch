@@ -1,0 +1,52 @@
+---
+# tasks file for OULibraries.solr-onesearch
+
+- name: Stop Solr
+  service:
+    name: solr
+    state: stopped
+
+- name: Configure Solr for Basic Auth
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: solr
+    group: solr
+  with_items:
+    - src: jetty.xml
+      dest: /opt/solr/example/etc/jetty.xml
+    - src:  webdefault.xml
+      dest: /opt/solr/example/etc/webdefault.xml
+
+- name: Configure Solr Basic Auth User
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: solr
+    group: solr
+    mode: 0640
+  with_items:
+    - src: realm.properties.j2 
+      dest: /opt/solr/example/etc/realm.properties
+
+- name: Configure Solr for Drupal Apachesolr
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: solr
+    group: solr
+  with_items:
+    - src: schema.xml
+      dest: /var/solr/collection1/conf/schema.xml
+    - src: solrconfig.xml
+      dest: /var/solr/collection1/conf/solrconfig.xml
+    - src: protwords.txt
+      dest: /var/solr/collection1/conf/protwords.txt
+
+- name: Start Solr
+  service:
+    name: solr
+    state: started
+
+
+

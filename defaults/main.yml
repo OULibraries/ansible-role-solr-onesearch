@@ -1,0 +1,5 @@
+---
+# defaults file for OULibraries.solr-onesearch
+
+onesearch_solr_user: solr
+onesearch_solr_pass: solr
