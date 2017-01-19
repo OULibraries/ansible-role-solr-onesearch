@@ -48,5 +48,7 @@
     name: solr
     state: started
 
-
-
+- name: Set SELinux exceptions so nginx can talk to Solr
+  command: "setsebool -P {{ item }} on"
+  with_items:
+    - httpd_can_network_connect
