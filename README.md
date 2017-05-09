@@ -30,7 +30,7 @@ Including an example of how to use your role (for instance, with variables passe
 License
 -------
 
-BSD
+[MIT](https://github.com/OULibraries/ansible-role-solr-onesearch/blob/master/LICENSE)
 
 Author Information
 ------------------
